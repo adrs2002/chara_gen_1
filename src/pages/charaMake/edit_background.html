@@ -1,0 +1,86 @@
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="../../css/yurige.css">
+  <link rel="stylesheet" type="text/css" href="../../css/pickr.min.css">
+  <script src="index_ui.js"></script>
+  <script src="../../../lib/hammer.min.js"></script>
+  <script src="../../../lib/pickr.min.js"></script>
+
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+</head>
+
+<body>
+  <div id="editableContent" class="ui_base">
+    <div class="bt_big flex-col scroll_back" style="margin:5% 10% ;">
+      <div class="flex-oneline">
+        <img src="./../../content/img/i_back_ue.svg" class="icon_base" >
+        <span class="bt_big editable_text_1">上の色</span>
+        <span class="pickr_top"></span>
+      </div>
+      <div class="flex-oneline">
+          <img src="./../../content/img/i_back_naka.svg" class="icon_base" >
+        <span class="bt_big editable_text_1">中の色</span>
+        <span class="pickr_mid"></span>
+      </div>
+      <div class="flex-oneline">
+          <img src="./../../content/img/i_back_sita.svg" class="icon_base" >
+        <span class="bt_big editable_text_1">下の色</span>
+        <span class="pickr_btm"></span>
+      </div>
+    </div>
+    <div class="fotter" onclick="window.editableUi.replaseElement('ui', 'e_top.html')">
+      <img src="./../../content/img/i_e_top.svg" class="icon_base bdr_lerf" >
+      <img src="./../../content/img/i_backe.svg" class="icon_base bdr_lerf" >
+    </div>
+  </div>
+  <script id="ui_using">
+        window.ui_using = {};
+  
+        window.ui_using.pic_components = {preview: false,hue: true,interaction: {save: true}};
+
+        window.ui_using.pic_top = new Pickr({
+        el: '.pickr_top',
+        parent: '.ui_base',
+        comparison: false,
+        components : window.ui_using.pic_components,
+        default : Engine.gameScene.editableSetting.setting.bc1.getHexString(),
+
+        onChange(hsva, instance) {      
+            const colBase = hsva.toRGBA();    
+            Engine.gameScene.editableSetting.change("","bc1",new THREE.Color(colBase[0]/ 255, colBase[1] / 255, colBase[2] / 255));
+        }
+      });
+
+      window.ui_using.pic_mid = new Pickr({
+        el: '.pickr_mid',
+        parent: '.ui_base',
+        comparison: false,
+        components : window.ui_using.pic_components,
+        default : Engine.gameScene.editableSetting.setting.bc2.getHexString(),
+
+        onChange(hsva, instance) {      
+            const colBase = hsva.toRGBA();    
+            Engine.gameScene.editableSetting.change("","bc2",new THREE.Color(colBase[0]/ 255, colBase[1] / 255, colBase[2] / 255));
+        }
+      });
+
+      window.ui_using.pic_btm = new Pickr({
+        el: '.pickr_btm',
+        parent: '.ui_base',
+        comparison: false,
+        components : window.ui_using.pic_components,
+        default : Engine.gameScene.editableSetting.setting.bc3.getHexString(),
+
+        onChange(hsva, instance) {      
+            const colBase = hsva.toRGBA();    
+            Engine.gameScene.editableSetting.change("","bc3",new THREE.Color(colBase[0]/ 255, colBase[1] / 255, colBase[2] / 255));
+        }
+      });
+
+      window.index_ui.replacePicker();
+    </script>
+</body>
+
+</html>

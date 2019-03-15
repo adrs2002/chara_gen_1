@@ -1,0 +1,110 @@
+.bt_big {
+    border : 1px #7fbfff solid;
+    text-align: center;
+    padding: 1vh 1vw;
+    font-size:20pt;
+    border-radius: 0.4em;
+}
+
+.bt_large_bc {
+    background-color: rgba(36, 252, 144, 0.5) !important;
+    cursor: pointer;
+}
+
+.bt_leftBox {
+    border : 1px #7fbfff solid;
+    background-color: rgba(36, 252, 216, 0.2);
+    text-align: left;
+    vertical-align: middle;
+    padding: 0.3vh 0.3vw;
+    font-size:2.5vh;
+    border-radius: 0.4em;
+}
+
+
+.selecting {
+    background-color: rgba(118, 255, 255, 0.66)  !important;
+}
+
+.rangeSide{
+    font-size: 10pt;
+    margin: 0.2em;
+}
+
+.combobox{
+    font-size: 14pt;
+    margin: 0.1em;
+    width: 90%;
+}
+
+.flex {
+    display: flex; 
+    flex-flow:row wrap;
+    overflow-y: scroll;
+    align-content: flex-start;
+}
+
+.flex-oneline {
+    display: flex; 
+    justify-content: space-between;
+}
+
+.flex-col {
+    display: flex; 
+    flex-direction: column;
+    max-height: 40vh;
+    overflow-y: scroll;
+}
+
+flex-col > div{
+    width:85%;
+}
+
+.fotter{
+    bottom: 0vh;
+    margin-bottom: 1vh;
+    /*border : 1px #0000ff solid;*/
+    display: flex; 
+    position: fixed; 
+    width: 90vw;
+    max-height: 8vh;
+    padding: 0.2vh 1vw;
+}
+
+.scroll_back{    
+    border-radius: 0.4em;
+    background-color: rgba(255,200,150,0.5);
+    height: 90%;
+}
+
+.scroll_back > img{
+    height: 3.5em;
+}
+
+.editable_text_1{
+    background-color: rgba(100, 200, 250, 0.5);
+    height: 1em;
+    padding: 0.3em;
+    margin: 0.4em 0.2em;
+    font-size: 3vh;
+}
+
+.icon_base{
+    margin:0.5em  0.2em ;
+    padding: 0.2em;
+    width: 12em;
+    max-width: 4.5vh;
+    max-height: 4.5vh;
+    background-color: rgba(255, 250, 240, 0.66);
+}
+
+.bt_leftBox > .icon_base{
+    margin: 0.1em ;
+    padding: 0.1em;
+    width: 10em;
+}
+
+.bdr_lerf{
+    border-radius:  0.2em 0.6em 0.2em;
+    cursor: pointer;
+}

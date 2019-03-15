@@ -1,0 +1,33 @@
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="../../css/yurige.css">
+  <link rel="stylesheet" type="text/css" href="../../css/pickr.min.css">
+  <script src="index_ui.js"></script>
+  <script src="../../../lib/hammer.min.js"></script>
+  <script src="../../../lib/pickr.min.js"></script>
+
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+</head>
+
+<body>
+  <div id="editableContent" class="ui_base">
+    <div id="sc0_pose" class="bt_big flex scroll_back" style="margin:5% 10% ;">
+
+    </div>
+    <div class="fotter"  onclick="window.editableUi.replaseElement('ui', 'e_top.html')">
+      <img src="./../../content/img/i_e_top.svg" class="icon_base bdr_lerf"  onclick="window.editableUi.replaseElement('ui', 'e_top.html')">      
+      <img src="./../../content/img/i_pause.svg" class="icon_base bdr_lerf" >
+    </div>
+  </div>
+  <script id="ui_using">
+        window.ui_using = {};
+  
+        window.index_ui.makeImaegSelectBox(Engine.gameScene.editableSetting.editableItems.pose, document.getElementById("sc0_pose") , "data-pose-objid", window.editableUi.changePose );
+        
+
+    </script>
+</body>
+
+</html>

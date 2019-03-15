@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta charset="utf-8"/>
+</head>
+
+<body>
+  <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="../../css/yurige.css">
+  <link rel="stylesheet" type="text/css" href="../../css/pickr.min.css">
+  
+<div class="viewdiv" id="viewdiv">
+    <div class="modalWapper" id="modalWapper">
+        <div class="center_wapper" id="modal_d">
+        </div>
+    </div>
+</div>
+
+<script src="../../lib/hammer.min.js"></script>
+
+<script src="../../lib/threelibs.js"></script>
+<script src="../../lib/content.js"></script>
+
+<script src="../../lib/pickr.min.js"></script>
+
+<script src="../../lib/Engine.js"></script>
+
+<script src="../../lib/stats.min.js"></script>
+
+<script src="index.js" charset="UTF-8"></script>
+
+<script src="index_ui.js" charset="UTF-8"></script>
+
+<script src="../../js/editableUi.js" charset="UTF-8"></script>
+
+<script>
+
+    this.content = null;
+
+    // initEngine.init() が終わった後に実行されるコールバック処理がこちら
+    function init_callback() {
+        setTimeout(() => {
+            Engine.content = window.parent.content;
+            //Engine.virtualSticks = new VirtualSticks(1, true);
+            // 基本的に、画面の切り替えは「GameScene」というクラスで実装します。      
+            Engine.gameScene = new charaMakeScene();
+            Engine.update();
+
+            //window.document.getElementById("ui").addEventListener( 'touchmove', function(e){e.preventDefault();});
+            window.editableUi.replaseElement("ui", "m_top.html");
+
+        });
+    }
+
+    window.changeScene = function (_sceneName) {
+        window.parent.content = Engine.content;
+        Engine.gameScene.dispose();
+        //window.parent.parentCall('location', {url: '../hanger.html', nextUrl: 'st1/load.html'});
+    }
+
+    Engine.initialize(init_callback, 1, {forceLanscape:true, pxRatioFactor:2.0, useAntiAlias:true});
+</script>
+
+<div id="ui" class="ui_base flex-oneline" ></div>
+
+
+</body>
+</html>

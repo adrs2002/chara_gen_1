@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="../../css/yurige.css">
+  <link rel="stylesheet" type="text/css" href="../../css/pickr.min.css">
+  <script src="index_ui.js"></script>
+  <script src="../../../lib/hammer.min.js"></script>
+  <script src="../../../lib/pickr.min.js"></script>
+
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+</head>
+
+<body>
+  <div id="editableContent" class="ui_base">
+    <div class="flex-oneline">
+        <div id="sc0_left" class="bt_big flex-col scroll_back sc0_left">
+            <span id="sc1_hair_f" class="bt_leftBox selecting">
+                <img src="./../../content/img/i_hair_f.svg" class="icon_base bdr_lerf" >
+                前髪</span>
+            <span id="sc1_hair_b" class="bt_leftBox">
+                <img src="./../../content/img/i_hair_b.svg" class="icon_base bdr_lerf" >
+                後ろ髪</span>
+            <span id="sc1_hair_c" class="bt_leftBox">
+                <img src="./../../content/img/i_hair_c.svg" class="icon_base bdr_lerf" >
+                髪の色</span>
+          </div>
+      
+          <div id="sc2_hair_f" class="bt_big flex scroll_back sc2_right" style="display: inherit;">
+      
+          </div>
+      
+          <div id="sc2_hair_b" class="bt_big flex scroll_back sc2_right" style="display: none;">
+      
+          </div>
+      
+          <div id="sc2_hair_c" class="bt_big flex-oneline scroll_back sc2_right" style="display: none;">
+            <span class="bt_big editable_text_1">髪の色</span>
+            <span id="pickr_haircol" class="pickr_haircol"></span>
+          </div>
+    </div>
+
+    <div class="fotter"  onclick="window.editableUi.replaseElement('ui', 'c_top.html')">
+        <img src="./../../content/img/i_e_top.svg" class="icon_base bdr_lerf"   onclick="window.editableUi.replaseElement('ui', 'e_top.html')">
+        <img id="c_view" src="./../../content/img/i_leftg.svg" class="icon_base bdr_lerf"  onclick="window.editableUi.replaseElement('ui', 'c_top.html')">
+        <img src="./../../content/img/i_hair_top.svg" class="icon_base bdr_lerf">
+    </div>
+  </div>
+  <script id="ui_using">
+        window.ui_using = {};
+        if(window.editableUi.editGroup === "c2"){ 
+            document.getElementById("c_view").src = "./../../content/img/i_rightg.svg"; 
+            window.ui_using.nowTargetSetting = Engine.gameScene.editableSetting.setting.c2;
+        }  else {
+            window.ui_using.nowTargetSetting = Engine.gameScene.editableSetting.setting.c1;
+        }
+
+        window.index_ui.makeLinkVisibleBox(["hair_f","hair_b","hair_c"]);
+
+        window.index_ui.makeImaegSelectBox(Engine.gameScene.editableSetting.editableItems.hair_f, document.getElementById("sc2_hair_f") , "data-hair-objid", window.editableUi.changeHair_f );
+        window.index_ui.makeImaegSelectBox(Engine.gameScene.editableSetting.editableItems.hair_b, document.getElementById("sc2_hair_b") , "data-hair-objid", window.editableUi.changeHair_b );
+
+        window.ui_using.pic_components = {preview: false,hue: true,interaction: { /*input: true,hex: true,*/ save: true}};
+
+        window.ui_using.pic_hairCol = new Pickr({
+        el: '.pickr_haircol',
+        parent: '.ui_base',
+        comparison: false,
+        components : window.ui_using.pic_components,
+        default : window.ui_using.nowTargetSetting.hc.getHexString(),
+        
+        onChange(hsva, instance) {      
+            const colBase = hsva.toRGBA();    
+            window.editableUi.changeHair_c(new THREE.Color(colBase[0] / 255, colBase[1] / 255, colBase[2] / 255));
+        }
+      });
+      
+      window.index_ui.replacePicker();
+
+    </script>
+</body>
+
+</html>

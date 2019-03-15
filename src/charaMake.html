@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <title>きゃらじぇね！</title>
+  <meta charset="utf-8"/>
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <style>
+  /* loader from https://projects.lukehaas.me/css-loaders/  */
+  .loader, .loader:after, .loader:before { border-radius: 50%; width: 2.5em; height: 2.5em; -webkit-animation: load7 1.8s infinite ease-in-out; animation: load7 1.8s infinite ease-in-out } .loader { font-size: 10px; margin: 80px auto; position: relative; text-indent: -9999em; -webkit-transform: translateZ(0); transform: translateZ(0); -webkit-animation-delay: -.16s; animation-delay: -.16s } .loader:after, .loader:before { content: ''; position: absolute; top: 0 } .loader:before { left: -3.5em; -webkit-animation-delay: -.32s; animation-delay: -.32s } .loader:after { left: 3.5em } @-webkit-keyframes load7 { 0%, 100%, 80% { box-shadow: 0 2.5em 0 -1.3em } 40% { box-shadow: 0 2.5em 0 0 } } @keyframes load7 { 0%, 100%, 80% { box-shadow: 0 2.5em 0 -1.3em } 40% { box-shadow: 0 2.5em 0 0 } } .loader { color: #0ebe43; }
+  </style>
+
+</head>
+
+<body oncontextmenu="return false">
+  <link rel="stylesheet" type="text/css" href="css/normalize.css">
+  <div class="viewdiv" id="viewdiv">
+    <iframe class="viewdiv" id="frame1" scrolling="no" sandbox="allow-same-origin allow-scripts allow-top-navigation allow-top-navigation-by-user-activation"></iframe>
+    <div class="center_wapper" id="loader_d">
+      <div class="loader">Loading...</div>
+      <div style="margin-top:4em;" id="load_info">xxx %</div>
+    </div>
+  </div>
+  <div class="modalWapper" id="modalWapper">
+    <div class="center_wapper" id="modal_d">
+    </div>
+  </div>
+
+  <script>
+  // ここには、three.jsなどの宣言を行う前でも指定可能なもののみをセット
+  const OnlyTouchScreen = true;
+  let breakedFlag = false;
+  const stickCount = 1;
+
+  if (!'ontouchstart' in window && OnlyTouchScreen) {
+    breakedFlag = true;
+
+  }
+
+  window.defaultpage = 'pages/charaMake/index.html';
+
+  </script>
+  <script src="../lib/hammer.min.js"></script>
+  <script src="../lib/content.js"></script>
+  <script src="../lib/index.js"></script>
+
+  <script>
+ 
+  </script>
+
+</body>
+
+</html>

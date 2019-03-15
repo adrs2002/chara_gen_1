@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="../../css/yurige.css">
+  <link rel="stylesheet" type="text/css" href="../../css/pickr.min.css">
+  <script src="index_ui.js"></script>
+  <script src="../../../lib/hammer.min.js"></script>
+  <script src="../../../lib/pickr.min.js"></script>
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+</head>
+
+<body>
+  <div id="editableContent" class="ui_base">
+    <div class="flex-oneline">
+      <div id="sc0_left" class="bt_big flex-col scroll_back sc0_left">
+        <span id="sc1_face_t" class="bt_leftBox selecting">
+                <img src="./../../content/img/i_mo_type.svg" class="icon_base bdr_lerf" > 
+              表情</span>
+        <span id="sc1_face_c" class="bt_leftBox">
+                <img src="./../../content/img/i_mo_aka.svg" class="icon_base bdr_lerf" > 
+              頬の赤</span>
+        <span id="sc1_face_g" class="bt_leftBox">
+                <img src="./../../content/img/i_mo_gaan.svg" class="icon_base bdr_lerf" > 
+              ガーン</span>
+        <span id="sc1_eye_ex" class="bt_leftBox">
+                <img src="./../../content/img/i_mo_e_ex.svg" class="icon_base bdr_lerf" > 
+              特殊眼</span>
+      </div>
+      <div id="sc2_face_t" class="bt_big flex scroll_back sc2_right" style="display: inherit;">
+        <div id="s_mouth_type" class="flex scroll_back sc2_right_h" style="display: inherit;"></div>
+        <div class=" flex-oneline ">
+          <span class="rangeSide">0</span> <input type="range" id="range_mouse_tv" value="0" min="0" max="1" step="0.05" oninput="window.editableUi.changeMouse_tv(this.value)" /><span class="rangeSide">1.0</span>
+        </div>
+      </div>
+      <div id="sc2_face_c" class="bt_big flex-oneline scroll_back sc2_right" style="display: none;">
+        <span class="rangeSide">0</span> <input type="range" id="range_face_ceek" value="0" min="0" max="1" step="0.05" oninput="window.editableUi.changeFace_ceek(this.value)" /><span class="rangeSide">1.0</span>
+      </div>
+      <div id="sc2_face_g" class="bt_big flex-oneline scroll_back sc2_right" style="display: none;">
+        <span class="rangeSide">0</span> <input type="range" id="range_face_gaan" value="0" min="0" max="1" step="0.05" oninput="window.editableUi.changeFace_gaan(this.value)" /><span class="rangeSide">1.0</span>
+      </div>
+      <div id="sc2_eye_ex" class="bt_big flex-col scroll_back sc2_right" style="display: none;">
+        <div id="s_eye_ex" class="flex scroll_back sc2_right_h" style="display: inherit;"></div>
+      </div>
+    </div>
+    <div class="fotter" onclick="window.editableUi.replaseElement('ui', 'c_top.html')">
+      <img src="./../../content/img/i_e_top.svg" class="icon_base bdr_lerf"   onclick="window.editableUi.replaseElement('ui', 'e_top.html')">
+      <img id="c_view" src="./../../content/img/i_leftg.svg" class="icon_base bdr_lerf"  onclick="window.editableUi.replaseElement('ui', 'c_top.html')">
+      <img src="./../../content/img/i_mouth_top.svg" class="icon_base bdr_lerf">
+    </div>
+    </div>
+    <script id="ui_using">
+    window.ui_using = {};
+
+    if (window.editableUi.editGroup === "c2") {
+      document.getElementById("c_view").src = "./../../content/img/i_rightg.svg";
+      window.ui_using.nowTargetSetting = Engine.gameScene.editableSetting.setting.c2;
+    } else {
+      window.ui_using.nowTargetSetting = Engine.gameScene.editableSetting.setting.c1;
+    }
+
+    window.index_ui.makeLinkVisibleBox(["face_t", "face_c", "face_g", "eye_ex"]);
+
+    window.ui_using.pic_components = {
+      preview: false,
+      hue: true,
+      interaction: {
+        save: true
+      }
+    };
+
+    window.ui_using.selImage_Type = function(_val) {
+      if (_val.length === 0) {
+        document.getElementById(range_eye_tv).value = 0.0;
+      } else {
+        document.getElementById(range_eye_tv).value = 1.0;
+      }
+      document.getElementById(range_eye_tv).oninput(_val, 1.0);
+    };
+
+    window.ui_using.selImage_mayu = function(_val) {
+      window.index_ui.changeSel(_val, "range_eye_mv");
+    };
+
+    window.index_ui.makeImaegSelectBox(Engine.gameScene.editableSetting.editableItems.mouth_type, document.getElementById("s_mouth_type"), "data-mouth-typename", window.editableUi.changeMouse_t, "range_mouse_tv");
+    window.index_ui.makeImaegSelectBox(Engine.gameScene.editableSetting.editableItems.ExEye_type, document.getElementById("s_eye_ex"), "data-exeye-typename", window.editableUi.changeEye_ex, null, true);
+
+    document.getElementById("range_face_ceek").value = window.ui_using.nowTargetSetting.rr;
+    document.getElementById("range_face_gaan").value = window.ui_using.nowTargetSetting.gn;
+
+    </script>
+</body>
+
+</html>

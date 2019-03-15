@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="../../css/yurige.css">
+  <link rel="stylesheet" type="text/css" href="../../css/pickr.min.css">
+  <script src="index_ui.js"></script>
+  <script src="../../../lib/hammer.min.js"></script>
+  <script src="../../../lib/pickr.min.js"></script>
+
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+</head>
+
+<body>
+  <div id="editableContent" class="ui_base">
+    <div class="flex-oneline">
+        <div id="sc0_left" class="bt_big flex-col scroll_back sc0_left">
+            <span id="sc1_eye_c" class="bt_leftBox selecting">              
+              <img src="./../../content/img/i_eye_c.svg" class="icon_base bdr_lerf" > 
+              眼の色</span>
+            <span id="sc1_eye_turi" class="bt_leftBox">
+              <img src="./../../content/img/i_eye_hard.svg" class="icon_base bdr_lerf" > 
+              ツリ目</span>
+            <span id="sc1_eye_hoso" class="bt_leftBox">
+              <img src="./../../content/img/i_eye_hoso.svg" class="icon_base bdr_lerf" > 
+              細目</span>
+            <span id="sc1_eye_type" class="bt_leftBox">
+              <img src="./../../content/img/i_eye_type.svg" class="icon_base bdr_lerf" > 
+              まぶた</span>
+            <span id="sc1_mayu_type" class="bt_leftBox">
+              <img src="./../../content/img/i_eye_blow.svg" class="icon_base bdr_lerf" > 
+              まゆげ</span>
+          </div>
+      
+          <div id="sc2_eye_c" class="bt_big flex scroll_back sc2_right " style="display: inherit;">
+            <span class="bt_big editable_text_1">眼の色</span>
+            <span id="pickr_eyecol" class="pickr_eyecol"></span>
+          </div>
+      
+          <div id="sc2_eye_turi" class="bt_big flex-oneline scroll_back sc2_right" style="display: none;">
+           <span class="rangeSide">0</span> <input type="range" id="range_eye_turi" value="0" min="0" max="1" step="0.05" oninput="window.editableUi.changeEye_h(this.value)" /><span class="rangeSide">1.0</span> 
+          </div>
+      
+          <div id="sc2_eye_hoso" class="bt_big flex-oneline scroll_back sc2_right" style="display: none;">
+            <span class="rangeSide">0</span> <input type="range" id="range_eye_hoso" value="0" min="0" max="1" step="0.05"  oninput="window.editableUi.changeEye_b(this.value)"/><span class="rangeSide">1.0</span> 
+          </div>
+
+          <div id="sc2_eye_type" class="bt_big flex-col scroll_back sc2_right" style="display: none;">
+
+            <div id="s_eye_type" class="flex scroll_back sc2_right_h" style="display: inherit;"></div>
+            <div class=" flex-oneline ">
+              <span class="rangeSide">0</span> <input type="range" id="range_eye_tv" value="0" min="0" max="1" step="0.05"  oninput="window.editableUi.changeEye_tv(this.value)"/><span class="rangeSide">1.0</span> 
+            </div>
+          </div>
+
+          <div id="sc2_mayu_type" class="bt_big flex-col scroll_back sc2_right" style="display: none;">
+
+            <div id="s_mayu_type" class="flex scroll_back sc2_right_h" style="display: inherit;"></div>
+            <div class=" flex-oneline ">
+              <span class="rangeSide">0</span> <input type="range" id="range_eye_mv" value="0" min="0" max="1" step="0.05"  oninput="window.editableUi.changeEye_mv(this.value)"/><span class="rangeSide">1.0</span> 
+            </div>
+          </div>
+    </div>
+
+    <div class="fotter" onclick="window.editableUi.replaseElement('ui', 'c_top.html')">
+        <img src="./../../content/img/i_e_top.svg" class="icon_base bdr_lerf"   onclick="window.editableUi.replaseElement('ui', 'e_top.html')">
+        <img id="c_view" src="./../../content/img/i_leftg.svg" class="icon_base bdr_lerf"  onclick="window.editableUi.replaseElement('ui', 'c_top.html')">
+        <img src="./../../content/img/i_eye_top.svg" class="icon_base bdr_lerf">
+    </div>
+  </div>
+  <script id="ui_using">
+        window.ui_using = {};
+    
+        if(window.editableUi.editGroup === "c2"){ 
+            document.getElementById("c_view").src = "./../../content/img/i_rightg.svg"; 
+            window.ui_using.nowTargetSetting = Engine.gameScene.editableSetting.setting.c2;
+        }  else {
+            window.ui_using.nowTargetSetting = Engine.gameScene.editableSetting.setting.c1;
+        }
+        
+        //右側セレクターの表示/非表示
+        window.index_ui.makeLinkVisibleBox(["eye_c","eye_turi","eye_hoso", "eye_type", "mayu_type" ]);
+
+        window.ui_using.pic_components = {preview: false,hue: true,interaction: {save: true}};
+
+        window.ui_using.selImage_Type = function(_val) {
+          if(_val.length === 0){
+             document.getElementById(range_eye_tv).value = 0.0;
+          } else {
+             document.getElementById(range_eye_tv).value = 1.0;
+          }
+          document.getElementById(range_eye_tv).oninput(_val, 1.0);
+        };
+/*
+        window.ui_using.selImage_mayu = function(_val) {
+          window.index_ui.changeSel(_val, "range_eye_mv");
+        };
+*/
+
+        window.ui_using.pic_eyeCol = new Pickr({
+          el: '.pickr_eyecol',
+          parent: '.ui_base',
+          comparison: false,
+          components : window.ui_using.pic_components,
+          default : window.ui_using.nowTargetSetting.ec.getHexString(),          
+  
+          onChange(hsva, instance) {      
+              const colBase = hsva.toRGBA();    
+              window.editableUi.changeEye_c(new THREE.Color(colBase[0] / 255, colBase[1] / 255, colBase[2] / 255));
+          }
+        });
+      
+      window.index_ui.replacePicker();
+
+      window.index_ui.makeImaegSelectBox(Engine.gameScene.editableSetting.editableItems.eye_type, document.getElementById("s_eye_type") , "data-eye-typename", window.editableUi.changeEye_t, "range_eye_tv");
+      window.index_ui.makeImaegSelectBox(Engine.gameScene.editableSetting.editableItems.mayu_type, document.getElementById("s_mayu_type") , "data-eye-mayuname", window.editableUi.changeEye_m, "range_eye_mv");
+
+      
+    </script>
+</body>
+
+</html>

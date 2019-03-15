@@ -1,0 +1,26 @@
+<html>
+    <head>        
+        <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
+        <link rel="stylesheet" type="text/css" href="../../css/yurige.css">
+            
+        <script src="index_ui.js"></script>
+        <script src="../../lib/hammer.min.js"></script>
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    </head>
+    <body>
+        <div id="editableContent" class="ui_base">
+            <div id="m_btn1" class="bt_big bt_large_bc" style="margin:25% 10% ;">じぇねる！</div>
+        </div>
+
+        <script id="ui_using">
+            window.ui_using = {};
+
+            window.ui_using.m_btn1 = document.getElementById("m_btn1");
+
+            //既存の関数をイベントリスナに登録する
+            window.ui_using.m_btn1.addEventListener( "click" , ()=>{window.editableUi.replaseElement("ui", "e_top.html")}, false );
+
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../css/yurige.css">
+    <link rel="stylesheet" type="text/css" href="../../css/pickr.min.css">
+    <script src="index_ui.js"></script>
+    <script src="../../../lib/hammer.min.js"></script>
+    <script src="../../../lib/pickr.min.js"></script>
+    
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+</head>
+<body>
+    <div id="editableContent" class="ui_base">
+        <div class="bt_big flex scroll_back" style="margin:5% 10% ;">
+
+            <img id="btn_hair" src="./../../content/img/i_hair_top.svg" class="icon_base bdr_lerf">
+            <img  id="btn_eyes" src="./../../content/img/i_eye_top.svg" class="icon_base bdr_lerf">
+            <img  id="btn_face" src="./../../content/img/i_mouth_top.svg" class="icon_base bdr_lerf">
+            <img  id="btn_body" src="./../../content/img/i_body_top.svg" class="icon_base bdr_lerf">
+            <img  id="btn_outer" src="./../../content/img/i_outer_top.svg" class="icon_base bdr_lerf">
+            <img id="btn_hand" src="./../../content/img/i_hand_top.svg" class="icon_base bdr_lerf">
+            <img id="btn_mzg" src="./../../content/img/i_mzg_top.svg" class="icon_base bdr_lerf">
+        </div>
+        
+        <div class="fotter" onclick="window.editableUi.replaseElement('ui', 'e_top.html')">
+            <img src="./../../content/img/i_e_top.svg" class="icon_base bdr_lerf" onclick="window.editableUi.replaseElement('ui', 'e_top.html')">
+            <img id="c_view" src="./../../content/img/i_leftg.svg" class="icon_base bdr_lerf"  class="icon_base bdr_lerf">
+        </div>
+    </div>
+
+    <script id="ui_using">
+        window.ui_using = {};
+
+        if(window.editableUi && window.editableUi.editGroup === "c2"){
+            document.getElementById("c_view").src = "./../../content/img/i_rightg.svg";
+        } 
+
+        window.ui_using.btn_hair = document.getElementById("btn_hair");
+        window.ui_using.btn_eyes = document.getElementById("btn_eyes");
+        window.ui_using.btn_face = document.getElementById("btn_face");
+        window.ui_using.btn_body = document.getElementById("btn_body");
+        window.ui_using.btn_outer = document.getElementById("btn_outer");
+        window.ui_using.btn_hand = document.getElementById("btn_hand");
+        window.ui_using.btn_mzg = document.getElementById("btn_mzg");
+        //イベントリスナに登録する
+        window.ui_using.btn_hair.addEventListener( "click" , ()=>{window.editableUi.replaseElement("ui", "edit_hair.html")}, false );
+        window.ui_using.btn_eyes.addEventListener( "click" , ()=>{window.editableUi.replaseElement("ui", "edit_eyes.html")}, false );
+        window.ui_using.btn_face.addEventListener( "click" , ()=>{window.editableUi.replaseElement("ui", "edit_face.html")}, false );
+        window.ui_using.btn_body.addEventListener( "click" , ()=>{window.editableUi.replaseElement("ui", "edit_body.html")}, false );
+        window.ui_using.btn_outer.addEventListener( "click" , ()=>{window.editableUi.replaseElement("ui", "edit_outer.html")}, false );
+        window.ui_using.btn_hand.addEventListener( "click" , ()=>{window.editableUi.replaseElement("ui", "edit_hand.html")}, false );
+        window.ui_using.btn_mzg.addEventListener( "click" , ()=>{window.editableUi.replaseElement("ui", "edit_inner.html")}, false );
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="../../css/yurige.css">
+  <link rel="stylesheet" type="text/css" href="../../css/pickr.min.css">
+  <script src="index_ui.js"></script>
+  <script src="../../../lib/hammer.min.js"></script>
+  <script src="../../../lib/pickr.min.js"></script>
+
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+</head>
+
+<body>
+  <div id="editableContent" class="ui_base">
+    <div class="flex-oneline">
+        <div id="sc0_left" class="bt_big flex-col scroll_back sc0_left">
+            <span id="sc1_body_c" class="bt_leftBox selecting">
+                <img src="./../../content/img/i_body_c.svg" class="icon_base bdr_lerf" >
+                肌の色</span>
+            <span id="sc1_body_bast" class="bt_leftBox">
+                <img src="./../../content/img/i_body_bast.svg" class="icon_base bdr_lerf" >
+                貧/巨</span>
+                
+          </div>
+      
+          <div id="sc2_body_c" class="bt_big flex scroll_back sc2_right" style="display: inherit;">
+            <span class="rangeSide">黄</span> <input type="range" id="range_body_c" value="0" min="0" max="1" step="0.05" oninput="window.editableUi.changeBody_c(this.value)" /><span class="rangeSide">白</span> 
+          </div>
+
+          <div id="sc2_body_bast" class="bt_big flex scroll_back sc2_right" style="display: none;">
+            <span class="rangeSide">貧</span> <input type="range" id="range_bast_size" value="0" min="-1" max="1" step="0.1" oninput="window.editableUi.changeBody_bast(this.value)" /><span class="rangeSide">巨</span> 
+          </div>
+      
+    </div>
+
+    <div class="fotter"  onclick="window.editableUi.replaseElement('ui', 'c_top.html')">
+        <img src="./../../content/img/i_e_top.svg" class="icon_base bdr_lerf"   onclick="window.editableUi.replaseElement('ui', 'e_top.html')">
+        <img id="c_view" src="./../../content/img/i_leftg.svg" class="icon_base bdr_lerf"  onclick="window.editableUi.replaseElement('ui', 'c_top.html')">
+        <img src="./../../content/img/i_body_top.svg" class="icon_base bdr_lerf">
+    </div>
+  </div>
+  <script id="ui_using">
+        window.ui_using = {};
+        if(window.editableUi.editGroup === "c2"){ 
+            document.getElementById("c_view").src = "./../../content/img/i_rightg.svg"; 
+            window.ui_using.nowTargetSetting = Engine.gameScene.editableSetting.setting.c2;
+        }  else {
+            window.ui_using.nowTargetSetting = Engine.gameScene.editableSetting.setting.c1;
+        }
+        
+        window.index_ui.makeLinkVisibleBox(["body_c","body_bast"]);
+
+        document.getElementById("range_body_c").value = window.ui_using.nowTargetSetting.bc;
+        document.getElementById("range_bast_size").value = window.ui_using.nowTargetSetting.bst;
+
+    </script>
+</body>
+
+</html>

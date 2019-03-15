@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="../../css/yurige.css">
+  <link rel="stylesheet" type="text/css" href="../../css/pickr.min.css">
+  <script src="index_ui.js"></script>
+  <script src="../../../lib/hammer.min.js"></script>
+  <script src="../../../lib/pickr.min.js"></script>
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+</head>
+
+<body>
+  <div id="editableContent" class="ui_base">
+    <div class="flex-oneline">
+      <div id="sc0_left" class="bt_big flex-col scroll_back sc0_left">
+        <span id="sc1_hand_l_t" class="bt_leftBox selecting">
+                <img src="./../../content/img/i_hand_l_t.svg" class="icon_base bdr_lerf" >
+                左：親指</span>
+        <span id="sc1_hand_l_a" class="bt_leftBox">
+                <img src="./../../content/img/i_hand_l_a.svg" class="icon_base bdr_lerf" >
+                左：全体</span>
+        <span id="sc1_hand_r_t" class="bt_leftBox">
+                <img src="./../../content/img/i_hand_r_t.svg" class="icon_base bdr_lerf" >
+                右：親指</span>
+        <span id="sc1_hand_r_a" class="bt_leftBox">
+                <img src="./../../content/img/i_hand_r_a.svg" class="icon_base bdr_lerf" >
+                右：全体</span>
+      </div>
+      <div id="sc2_hand_l_t" class="bt_big flex scroll_back sc2_right" style="display: inherit;">
+        <div id="s_hand_l_t" class="flex scroll_back sc2_right_h" style="display: inherit;"></div>
+        <div class=" flex-oneline ">
+          <span class="rangeSide">0</span> <input type="range" id="range_hand_l_tv" value="0" min="0" max="1" step="0.05" oninput="window.editableUi.changeHand_v('ltv', this.value)" /><span class="rangeSide">1.0</span>
+        </div>
+      </div>
+      <div id="sc2_hand_l_a" class="bt_big flex scroll_back sc2_right" style="display: none;">
+        <div id="s_hand_l_a" class="flex scroll_back sc2_right_h" style="display: inherit;"></div>
+        <div class=" flex-oneline ">
+          <span class="rangeSide">0</span> <input type="range" id="range_hand_l_av" value="0" min="0" max="1" step="0.05" oninput="window.editableUi.changeHand_v('lav',this.value)" /><span class="rangeSide">1.0</span>
+        </div>
+      </div>
+      <div id="sc2_hand_r_t" class="bt_big flex scroll_back sc2_right" style="display: none;">
+        <div id="s_hand_r_t" class="flex scroll_back sc2_right_h" style="display: inherit;"></div>
+        <div class=" flex-oneline ">
+          <span class="rangeSide">0</span> <input type="range" id="range_hand_r_tv" value="0" min="0" max="1" step="0.05" oninput="window.editableUi.changeHand_v('rtv',this.value)" /><span class="rangeSide">1.0</span>
+        </div>
+      </div>
+      <div id="sc2_hand_r_a" class="bt_big flex scroll_back sc2_right" style="display: none;">
+        <div id="s_hand_r_a" class="flex scroll_back sc2_right_h" style="display: inherit;"></div>
+        <div class=" flex-oneline ">
+          <span class="rangeSide">0</span> <input type="range" id="range_hand_r_av" value="0" min="0" max="1" step="0.05" oninput="window.editableUi.changeHand_v('rav',this.value)" /><span class="rangeSide">1.0</span>
+        </div>
+      </div>
+    </div>
+    <div class="fotter" onclick="window.editableUi.replaseElement('ui', 'c_top.html')">
+      <img src="./../../content/img/i_e_top.svg" class="icon_base bdr_lerf"   onclick="window.editableUi.replaseElement('ui', 'e_top.html')">
+      <img id="c_view" src="./../../content/img/i_leftg.svg" class="icon_base bdr_lerf"  onclick="window.editableUi.replaseElement('ui', 'c_top.html')">
+      <img src="./../../content/img/i_hand_top.svg" class="icon_base bdr_lerf">
+    </div>
+    </div>
+    <script id="ui_using">
+      window.ui_using = {};
+
+      if (window.editableUi.editGroup === "c2") {
+        document.getElementById("c_view").src = "./../../content/img/i_rightg.svg";
+        window.ui_using.nowTargetSetting = Engine.gameScene.editableSetting.setting.c2;
+      } else {
+        window.ui_using.nowTargetSetting = Engine.gameScene.editableSetting.setting.c1;
+      }
+
+      window.index_ui.makeLinkVisibleBox(["hand_l_t", "hand_l_a", "hand_r_t", "hand_r_a"]);
+
+      window.index_ui.makeImaegSelectBox(Engine.gameScene.editableSetting.editableItems.handMopth_0, document.getElementById("s_hand_l_t"), "data-hand-typename", window.editableUi.changeHand_l_t, "range_hand_l_tv");
+      window.index_ui.makeImaegSelectBox(Engine.gameScene.editableSetting.editableItems.handMopth_all, document.getElementById("s_hand_l_a"), "data-hand-typename", window.editableUi.changeHand_l_a, "range_hand_l_av");
+
+      window.index_ui.makeImaegSelectBox(Engine.gameScene.editableSetting.editableItems.handMopth_0, document.getElementById("s_hand_r_t"), "data-hand-typename", window.editableUi.changeHand_r_t, "range_hand_r_tv");
+      window.index_ui.makeImaegSelectBox(Engine.gameScene.editableSetting.editableItems.handMopth_all, document.getElementById("s_hand_r_a"), "data-hand-typename", window.editableUi.changeHand_r_a, "range_hand_r_av");
+
+      document.getElementById("range_hand_l_tv").value = window.ui_using.nowTargetSetting.ltv;
+      document.getElementById("range_hand_a_av").value = window.ui_using.nowTargetSetting.lav;
+      document.getElementById("range_hand_r_tv").value = window.ui_using.nowTargetSetting.rtv;
+      document.getElementById("range_hand_r_av").value = window.ui_using.nowTargetSetting.rav;
+
+    </script>
+</body>
+
+</html>

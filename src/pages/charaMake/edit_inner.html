@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="../../css/yurige.css">
+  <link rel="stylesheet" type="text/css" href="../../css/pickr.min.css">
+  <script src="index_ui.js"></script>
+  <script src="../../../lib/hammer.min.js"></script>
+  <script src="../../../lib/pickr.min.js"></script>
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+</head>
+
+<body>
+  <div id="editableContent" class="ui_base">
+    <div class="flex-oneline">
+      <div id="sc0_left" class="bt_big flex-col scroll_back sc0_left">
+        <span id="sc1_inner_t" class="bt_leftBox">
+                <img src="./../../content/img/i_mzg_tex.svg" class="icon_base bdr_lerf" >
+                柄
+            </span>
+        <span id="sc1_inner_c" class="bt_leftBox selecting">
+                <img src="./../../content/img/i_mzg_c1.svg" class="icon_base bdr_lerf" >
+                色
+            </span>
+      </div>
+      <div id="sc2_inner_t" class="bt_big flex scroll_back sc2_right" style="display: none;">
+      </div>
+      <div id="sc2_inner_c" class="bt_big flex-col scroll_back sc2_right" style="display: inherit;">
+        <div class="flex-oneline">
+          <span class="bt_big editable_text_1">ベース</span>
+          <span class="pickr_c1"></span>
+        </div>
+        <div class="flex-oneline">
+          <span class="bt_big editable_text_1">柄１</span>
+          <span class="pickr_c2"></span>
+        </div>
+        <div class="flex-oneline">
+          <span class="bt_big editable_text_1">柄２</span>
+          <span class="pickr_c3"></span>
+        </div>
+        <div class="flex-oneline">
+          <span class="bt_big editable_text_1">柄３</span>
+          <span class="pickr_c4"></span>
+        </div>
+      </div>
+    </div>
+    <div class="fotter" onclick="window.editableUi.replaseElement('ui', 'c_top.html')">
+      <img src="./../../content/img/i_e_top.svg" class="icon_base bdr_lerf"   onclick="window.editableUi.replaseElement('ui', 'e_top.html')">
+      <img id="c_view" src="./../../content/img/i_leftg.svg" class="icon_base bdr_lerf"  onclick="window.editableUi.replaseElement('ui', 'c_top.html')">
+      <img src="./../../content/img/i_mzg_top.svg" class="icon_base bdr_lerf">
+    </div>
+    </div>
+    <script id="ui_using">
+    window.ui_using = {};
+
+    if (window.editableUi.editGroup === "c2") {
+      document.getElementById("c_view").src = "./../../content/img/i_rightg.svg";
+      window.ui_using.nowTargetSetting = Engine.gameScene.editableSetting.setting.c2;
+    } else {
+      window.ui_using.nowTargetSetting = Engine.gameScene.editableSetting.setting.c1;
+    }
+
+
+    window.index_ui.makeLinkVisibleBox(["inner_t", "inner_c"]);
+
+    window.ui_using.pic_components = {
+      preview: false,
+      hue: true,
+      interaction: {
+        save: true
+      }
+    };
+
+    window.ui_using.pic_c1 = new Pickr({
+      el: '.pickr_c1',
+      parent: '.ui_base',
+      comparison: false,
+      components: window.ui_using.pic_components,
+      default: window.ui_using.nowTargetSetting.pc1.getHexString(),
+
+      onChange(hsva, instance) {
+        const colBase = hsva.toRGBA();
+        window.editableUi.changeInner_c("c1", new THREE.Color(colBase[0] / 255, colBase[1] / 255, colBase[2] / 255));
+      }
+    });
+
+    window.ui_using.pic_c2 = new Pickr({
+      el: '.pickr_c2',
+      parent: '.ui_base',
+      comparison: false,
+      components: window.ui_using.pic_components,
+      default: window.ui_using.nowTargetSetting.pc2.getHexString(),
+      onChange(hsva, instance) {
+        const colBase = hsva.toRGBA();
+        window.editableUi.changeInner_c("c2", new THREE.Color(colBase[0] / 255, colBase[1] / 255, colBase[2] / 255));
+      }
+    });
+
+    window.ui_using.pic_c3 = new Pickr({
+      el: '.pickr_c3',
+      parent: '.ui_base',
+      comparison: false,
+      components: window.ui_using.pic_components,
+      default: window.ui_using.nowTargetSetting.pc3.getHexString(),
+      onChange(hsva, instance) {
+        const colBase = hsva.toRGBA();
+        window.editableUi.changeInner_c("c3", new THREE.Color(colBase[0] / 255, colBase[1] / 255, colBase[2] / 255));
+      }
+    });
+
+    window.ui_using.pic_c4 = new Pickr({
+      el: '.pickr_c4',
+      parent: '.ui_base',
+      comparison: false,
+      components: window.ui_using.pic_components,
+      default: window.ui_using.nowTargetSetting.pc4.getHexString(),
+      onChange(hsva, instance) {
+        const colBase = hsva.toRGBA();
+        window.editableUi.changeInner_c("c4", new THREE.Color(colBase[0] / 255, colBase[1] / 255, colBase[2] / 255));
+      }
+    });
+
+    window.index_ui.replacePicker();
+
+    window.index_ui.makeImaegSelectBox(Engine.gameScene.editableSetting.editableItems.mzgTex, document.getElementById("sc2_inner_t"), "data-tex-id", window.editableUi.changeInner_t);
+
+    </script>
+</body>
+
+</html>
