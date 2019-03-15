@@ -1,0 +1,13 @@
+{
+    "semi": true,
+    "tabWidth": 4,
+    "useTabs": false,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "overrides": [{
+        "files": "*.test.js",
+        "options": {
+            "semi": false
+        }
+    }]
+}

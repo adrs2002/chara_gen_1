@@ -1,0 +1,33 @@
+{
+    "extends": [
+        "eslint:recommended"
+    ],
+    "globals": {
+        "window": true,
+        "THREE": true,
+        "Engine": true,
+        "QueryString" : true,
+        "Stats" : true,
+        "gameMath" : true
+    },
+    "plugins": [
+        "prettier"
+    ],
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "rules": {
+        "prettier/prettier": [
+            "error",
+            {
+                "singleQuote": true,
+                "semi": true,
+                "trailingComma": "es5"
+            }
+        ]
+    }
+}

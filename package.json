@@ -1,0 +1,81 @@
+{
+  "name": "y_charaedit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/main.html",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run preProcess && npm-run-all build:* && echo '######-- all build process complete !!! --######'",
+    "build:charamake": "build_charamake.sh",
+    "preProcess": "preProcess.sh",
+    "start": "npm run build && http-server ./build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrs2002/threeGameProjectBase.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adrs2002/threeGameProjectBase/issues"
+  },
+  "homepage": "https://github.com/adrs2002/threeGameProjectBase#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.4",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-es2015-rollup": "^3.0.0",
+    "babel-preset-power-assert": "^3.0.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.23.0",
+    "cpx": "^1.5.0",
+    "eslint": "^5.12.1",
+    "eslint-config-prettier": "^3.6.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-find-rules": "^3.3.1",
+    "eslint-plugin-import": "^2.15.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-standard": "^4.0.0",
+    "npm-run-all": "^4.1.5",
+    "parcel-bundler": "^1.10.3",
+    "power-assert": "^1.4.2",
+    "prettier": "1.16.1",
+    "prettier-eslint": "^8.8.2",
+    "prettier-eslint-cli": "^4.7.1",
+    "rimraf": "^2.6.1",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-buble": "^0.19.4",
+    "rollup-plugin-cleanup": "^3.0.0",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-json": "^3.1.0",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "three": "^0.98.0",
+    "uglify-save-license": "^0.4.1"
+  },
+  "dependencies": {
+    "electron": "3.0.7",
+    "eslint-config-mdcs": "^4.2.2",
+    "google-closure-compiler": "^20181008.0.0",
+    "htmlhint": "^0.10.1",
+    "jscat": "0.0.2",
+    "npm-cli": "^0.1.0",
+    "qunitjs": "^2.1.1",
+    "rollup": "^0.67.0",
+    "rollup-watch": "^4.0.0",
+    "uglify-js": "^3.0.23"
+  },
+  "babel": {
+    "presets": [
+      "es2015-rollup"
+    ]
+  }
+}
