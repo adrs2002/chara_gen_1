@@ -195,8 +195,11 @@ export default class buildGirl extends THREE.Object3D {
         let animeFind = false;
         for (let i = 0; i < this.loadedAnimation.length; i++) {
             if (this.loadedAnimation[i]._clip.animeName == _animeName) {
-                this.loadedAnimation[i].reset();
-                if (this.lastAction) {
+                if (
+                    this.lastAction &&
+                    this.lastAction._clip.animeName != _animeName
+                ) {
+                    this.loadedAnimation[i].reset();
                     this.lastAction.crossFadeTo(this.loadedAnimation[i], 0.3);
                     this.lastAction.paused = true;
                 }
