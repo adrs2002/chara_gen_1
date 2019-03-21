@@ -95,6 +95,7 @@ export default class buildGirl extends THREE.Object3D {
         );
         // 顔モデルは差し替えできない、という前提。他のモデルでも、ボーン構造を使いまわす
         this.skeletonBase = this.face.faceObject.children[0];
+        this.mixer = new THREE.AnimationMixer(this.skeletonBase);
 
         this.body = new bodyObject(this, _loader.bodyAsset);
         this.Huku = new hukuObject(this, _loader.hukuAsset);
@@ -103,12 +104,8 @@ export default class buildGirl extends THREE.Object3D {
 
         this.b_hair = new hairObject(this, _loader.b_hairAsset);
 
-        this.mixers = [];
         this.loadedAnimation = [];
-        this.addAnimationMixer(
-            this.animeBase.animations,
-            'animeBase' + this.Suf
-        );
+        this.addAnimation(this.animeBase.animations, 'animeBase' + this.Suf);
 
         //0はface(元boneオブジェクト)のため、スキップ
         for (let i = 1; i < this.children.length; i++) {
@@ -171,21 +168,16 @@ export default class buildGirl extends THREE.Object3D {
     }
 
     updateFrame(_delta) {
-        if (this.mixers && this.mixers.length > 0) {
-            for (let i = 0; i < this.mixers.length; i++) {
-                this.mixers[i].update(_delta);
-            }
+        if (this.mixer) {
+            this.mixer.update(_delta);
         }
-
-        //uper.update();
     }
 
-    addAnimationMixer(_anime, _animeName) {
+    addAnimation(_anime, _animeName) {
         for (let i = 0; i < _anime.length; i++) {
-            const mixer = new THREE.AnimationMixer(this.skeletonBase);
-            mixer.clipAction(_anime[i]).stop();
-            mixer.animeName = _animeName;
-            this.mixers.push(mixer);
+            _anime[i].animeName = _animeName;
+            this.loadedAnimation.push(this.mixer.clipAction(_anime[i]));
+            break;
         }
     }
 
@@ -193,7 +185,7 @@ export default class buildGirl extends THREE.Object3D {
         const gltfA = new animeAsset(_animeName + this.Suf, _url);
         return new Promise(resolve => {
             gltfA.load().then(() => {
-                this.addAnimationMixer(gltfA.animations, _animeName);
+                this.addAnimation(gltfA.animations, _animeName);
                 return resolve();
             });
         });
@@ -201,12 +193,16 @@ export default class buildGirl extends THREE.Object3D {
 
     changeAnime(_animeName, _url) {
         let animeFind = false;
-        for (let i = 0; i < this.mixers.length; i++) {
-            if (this.mixers[i].animeName == _animeName) {
-                this.mixers[i]._actions[0].play();
+        for (let i = 0; i < this.loadedAnimation.length; i++) {
+            if (this.loadedAnimation[i]._clip.animeName == _animeName) {
+                this.loadedAnimation[i].reset();
+                if (this.lastAction) {
+                    this.lastAction.crossFadeTo(this.loadedAnimation[i], 0.3);
+                    this.lastAction.paused = true;
+                }
+                this.loadedAnimation[i].play();
+                this.lastAction = this.loadedAnimation[i];
                 animeFind = true;
-            } else {
-                this.mixers[i]._actions[0].stop();
             }
         }
         if (animeFind) {
